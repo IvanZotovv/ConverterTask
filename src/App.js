@@ -1,24 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import MultilineChat from "./components/MultiLine/MultilineChat";
+import TableBlock from "./components/Table/TableBlock";
+import "./App.css";
+import {
+  apiForUSD,
+  apiForEUR,
+  getData,
+  combineObj,
+  lengthData
+} from "./utiles";
+const mokeData = [
+  {
+    EUR: 78,
+    USD: 84
+  },
+  {
+    EUR: 71,
+    USD: 72
+  },
+  {
+    EUR: 65,
+    USD: 68
+  }
+];
 
 function App() {
+  const [data, setData] = useState(mokeData);
+
+  useEffect(() => {
+    const timeout = setInterval(() => {
+      Promise.all([getData(apiForEUR), getData(apiForUSD)])
+        .then(combineObj)
+        .then(val => setData([...data, val]))
+        .catch(err => {
+          throw new Error(err);
+        });
+    }, 5000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [data, data.length]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="App-header">Конвертер</h1>
+      <div>
+        <MultilineChat data={lengthData(data)} />
+        <TableBlock data={lengthData(data)} />
+      </div>
     </div>
   );
 }
