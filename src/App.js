@@ -21,7 +21,7 @@ function App() {
         .catch(err => {
           throw new Error(err);
         });
-    }, 1000);
+    }, 5000);
     return () => {
       clearTimeout(timeout);
     };

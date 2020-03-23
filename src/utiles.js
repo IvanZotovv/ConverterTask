@@ -6,7 +6,7 @@ export const lengthData = data => (data.length > 10 ? data.splice(0, 1) : data);
 
 export const getData = currencySign => {
   return fetch(
-    `https://prime.exchangerate-api.com/v5/de5e352797113ea72d9e19eb/latest/${currencySign}`
+    ` https://prime.exchangerate-api.com/v5/b9487de27d4106d530ddff86/latest/${currencySign}`
   )
     .then(res => res.json())
     .then(data => filteringArray(data.conversion_rates, currencySign))
