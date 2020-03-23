@@ -9,23 +9,9 @@ import {
   combineObj,
   lengthData
 } from "./utiles";
-const mokeData = [
-  {
-    EUR: 78,
-    USD: 84
-  },
-  {
-    EUR: 71,
-    USD: 72
-  },
-  {
-    EUR: 65,
-    USD: 68
-  }
-];
 
 function App() {
-  const [data, setData] = useState(mokeData);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const timeout = setInterval(() => {
@@ -35,7 +21,7 @@ function App() {
         .catch(err => {
           throw new Error(err);
         });
-    }, 5000);
+    }, 1000);
     return () => {
       clearTimeout(timeout);
     };

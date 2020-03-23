@@ -3,8 +3,6 @@ import { Table } from "antd";
 import "./Table.css";
 
 export default function TableBlock({ data }) {
-  // const id = new Date().getUTCMilliseconds();
-  // console.log(id);
   const columns = [
     {
       title: "USD",
@@ -25,10 +23,10 @@ export default function TableBlock({ data }) {
           pagination={false}
           rowKey={row => row.id}
           dataSource={data}
+          scroll={{ y: 300 }}
         />
-        ;
       </div>
     );
   }
-  return <div>Loading</div>;
+  return null;
 }

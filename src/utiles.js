@@ -6,7 +6,7 @@ export const lengthData = data => (data.length > 10 ? data.splice(0, 1) : data);
 
 export const getData = currencySign => {
   return fetch(
-    `https://prime.exchangerate-api.com/v5/7776dd347f19954be9ec1e46/latest/${currencySign}`
+    `https://prime.exchangerate-api.com/v5/de5e352797113ea72d9e19eb/latest/${currencySign}`
   )
     .then(res => res.json())
     .then(data => filteringArray(data.conversion_rates, currencySign))
@@ -23,6 +23,8 @@ const filteringArray = (val, currencySign) =>
       return obj;
     }, {});
 
-export const combineObj = values => {
-  return { ...values.pop(), ...values.shift() };
-};
+export const combineObj = values => ({
+  ...values.pop(),
+  ...values.shift(),
+  id: new Date().getUTCMilliseconds()
+});
